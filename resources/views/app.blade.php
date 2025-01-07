@@ -914,18 +914,26 @@
             class="relative min-h-screen flex flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white">
             <div style="text-align: center;">
 
+                <h1 style="font-size: 48px;">
+                    Todo List Laravel
+                </h1>
+
+                @foreach ($listItems as $index => $listItem)
+                    <div style="display: flex; align-items: center; justify-content: center;">
+                        <p style="margin: 0;">List no. {{ $listItem->id }}: {{$listItem->name}}</p>
+                        <form method="post" action="{{ route('markAsDone', $listItem->id)}}" accept-charset="UTF-8"
+                            style="margin-left: 20px;">
+                            {{csrf_field()}}
+                            <button type="submit"
+                                style="background-color: white; border: 2px solid black; color: black; padding: 1px 5px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 12px;">
+                                Mark as done
+                            </button>
+                        </form>
+                    </div>
+                @endforeach
 
                 <form method="post" action="{{route('saveItem')}}" accept-charset="UTF-8">
                     {{csrf_field()}}
-
-                    <h1 style="font-size: 48px;">
-                        Todo List Laravel
-                    </h1>
-
-
-                    @foreach ($listItems as $index => $listItem)
-                        <p>Item {{ $index + 1 }}: {{$listItem->name}}</p>
-                    @endforeach
 
                     <br>
                     <br>
@@ -938,8 +946,22 @@
                     <button
                         style="background-color: white; border: 2px solid black; color: black; padding: 10px 24px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 12px;"
                         type="submit">
-                        Save List
+                        Add List
                     </button>
+
+                    <br>
+                    <br>
+                    <h1 style="font-size: 48px;">
+                        Completed Tasks
+                    </h1>
+                    <br>
+                    @foreach ($completeItems as $listItem)
+                        <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
+                            <p style="margin: 0;">List no. {{ $listItem->id }}: {{$listItem->name}}</p>
+                        </div>
+                    @endforeach
+
+
 
                 </form>
             </div>

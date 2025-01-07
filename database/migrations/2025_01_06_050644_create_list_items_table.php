@@ -26,4 +26,5 @@ class CreateListItemsTable extends Migration
     {
         Schema::dropIfExists('list_items');
     }
-};
+}
+;
